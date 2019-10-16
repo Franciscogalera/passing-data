@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavigationExtras, Router, ActivatedRoute } from '@angular/router';
+import { DataService } from '../services/data.service';
 
 
 @Component({
@@ -14,7 +15,7 @@ export class HomePage {
     interests: ['Ionic', 'Angular', 'Crypto']
   };
   
-  constructor(private router: Router) {
+  constructor(private router: Router, private dataService: DataService) {
     
   }
 
@@ -27,7 +28,10 @@ export class HomePage {
     this.router.navigate(['details'], navData);
   }
 
-  passDatawithService(){}
+  passDatawithService(){
+    this.dataService.setData(12, this.user);
+    this.router.navigateByUrl('/details/12');
+  }
 
   passDatawithState(){}
 
