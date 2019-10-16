@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { NavigationExtras, Router, ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-home',
@@ -6,7 +8,27 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+  user = {
+    name: 'Francisco Jose',
+    website: 'www.google.de',
+    interests: ['Ionic', 'Angular', 'Crypto']
+  };
+  
+  constructor(private router: Router) {
+    
+  }
 
-  constructor() {}
+  passDatawithQuery(){
+    const navData: NavigationExtras = {
+      queryParams: {
+        special: JSON.stringify(this.user)
+      }
+    };
+    this.router.navigate(['details'], navData);
+  }
+
+  passDatawithService(){}
+
+  passDatawithState(){}
 
 }
