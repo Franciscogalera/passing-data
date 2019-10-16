@@ -33,6 +33,13 @@ export class HomePage {
     this.router.navigateByUrl('/details/12');
   }
 
-  passDatawithState(){}
+  passDatawithState(){
+    const navData: NavigationExtras = {
+      state: {
+        user: this.user
+      }
+    };
+    this.router.navigate(['details'], navData);
+  }
 
 }

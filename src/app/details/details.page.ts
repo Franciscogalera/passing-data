@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 
 @Component({
@@ -10,10 +10,17 @@ import { DataService } from '../services/data.service';
 export class DetailsPage implements OnInit {
   data: any;
 
-  constructor(private route: ActivatedRoute, private dataService: DataService) {
+  constructor(private route: ActivatedRoute, private dataService: DataService, 
+    private router: Router) {
     this.route.queryParams.subscribe(params => {
       if(params && params.special){
         this.data = JSON.parse(params.special);
+      }
+    });
+    //Extras state
+    this.route.queryParams.subscribe(params => {
+      if (this.router.getCurrentNavigation().extras.state) {
+        this.data = this.router.getCurrentNavigation().extras.state.user;
       }
     });
    }
@@ -24,7 +31,6 @@ export class DetailsPage implements OnInit {
       this.data = this.dataService.getData(12);
       console.log(this.data);
     }
-    
   }
 
 }
